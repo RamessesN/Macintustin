@@ -24,7 +24,7 @@ struct NavigationButtonsView: View {
             } label: {
                 Text("Open in Maps")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
                     .frame(width: 170, height: 48)
                     .background(.green)
                     .cornerRadius(12)
@@ -36,7 +36,7 @@ struct NavigationButtonsView: View {
                 } label: {
                     Text("Cancel Current Trip")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .frame(width: 170, height: 48)
                         .background(.orange)
                         .cornerRadius(12)
@@ -48,7 +48,7 @@ struct NavigationButtonsView: View {
                 } label: {
                     Text("Get Directions")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .frame(width: 170, height: 48)
                         .background(.blue)
                         .cornerRadius(12)

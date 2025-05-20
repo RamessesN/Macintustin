@@ -18,15 +18,15 @@ struct EmptyPhotoPlaceholderView: View {
                 VStack(spacing: 8) {
                     Image(systemName: "photo.badge.exclamationmark")
                         .font(.system(size: 40))
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                     
                     Text("No Photos Available")
                         .font(.footnote)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                     
                     Text("Tap to Upload(Up to 3)")
                         .font(.footnote)
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                 }
                 .frame(width: geometry.size.width * 0.65, height: 185)
                 .background(Color(uiColor: .secondarySystemBackground))

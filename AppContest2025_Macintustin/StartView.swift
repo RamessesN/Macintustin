@@ -25,7 +25,7 @@ struct StartView: View {
                         Image(systemName: "globe.asia.australia.fill")
                             .resizable()
                             .frame(width: 120, height: 120)
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                             .opacity(opacity)
                             .scaleEffect(scale)
                             .onAppear {
@@ -38,7 +38,7 @@ struct StartView: View {
                         Text("Cairo World")
                             .font(.custom("Times New Roman", size: 40))
                             .fontWeight(.bold)
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
                             .opacity(opacity)
                             .offset(y: offsetY)
                             .onAppear {
@@ -53,7 +53,7 @@ struct StartView: View {
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                     Text("Macintustin 独家服务")
                         .font(.footnote)
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(.secondary)
                         .position(x: geometry.size.width / 2, y: geometry.size.height - 20)
                 }
             }

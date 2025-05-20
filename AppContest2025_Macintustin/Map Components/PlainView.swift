@@ -59,13 +59,13 @@ struct PlainView: View {
                     ZStack {
                         Circle()
                             .frame(width: 32, height: 32)
-                            .foregroundColor(.blue.opacity(0.25))
+                            .foregroundStyle(.blue.opacity(0.25))
                         Circle()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                         Circle()
                             .frame(width: 12, height: 12)
-                            .foregroundColor(.blue)
+                            .foregroundStyle(.blue)
                     }
                 }
                 
@@ -101,7 +101,7 @@ struct PlainView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(colorScheme == .dark ? Color.gray.opacity(0.8) : Color.white.opacity(0.8))
                         )
-                        .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                        .foregroundStyle(colorScheme == .dark ? Color.white : Color.black)
                         .shadow(radius: 10)
                         .padding()
                         .position(x: geometry.size.width / 2, y: geometry.size.height * 0.9)
@@ -112,7 +112,7 @@ struct PlainView: View {
                             searchText = ""
                         }) {
                             Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.black)
+                                .foregroundStyle(.black)
                                 .padding(.trailing)
                         }
                         .position(x: geometry.size.width * 0.9, y: geometry.size.height * 0.9)
@@ -240,31 +240,29 @@ extension PlainView {
     }
     
     func adjustMapRegion(userLocation: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
-        let userPoint = MKMapPoint(userLocation)
-        let destinationPoint = MKMapPoint(destinationCoordinate)
+        let userLocationCL = CLLocation(latitude: userLocation.latitude, longitude: userLocation.longitude)
+        let destinationLocationCL = CLLocation(latitude: destinationCoordinate.latitude, longitude: destinationCoordinate.longitude)
         
-        let mapRect = MKMapRect(
-            x: min(userPoint.x, destinationPoint.x),
-            y: min(userPoint.y, destinationPoint.y),
-            width: abs(userPoint.x - destinationPoint.x),
-            height: abs(userPoint.y - destinationPoint.y)
-        )
+        let eastWestDistance = abs(userLocationCL.coordinate.longitude - destinationLocationCL.coordinate.longitude) * 111_000 * cos(userLocation.latitude * .pi / 180)
+        let northSouthDistance = abs(userLocationCL.coordinate.latitude - destinationLocationCL.coordinate.latitude) * 111_000
         
-        let paddingValue = max(50, mapRect.height * 0.3)
-        let padding = UIEdgeInsets(
-            top: paddingValue,
-            left: paddingValue * 0.5,
-            bottom: paddingValue,
-            right: paddingValue * 0.5
-        )
+        let maxDistance = max(eastWestDistance, northSouthDistance)
         
-        let adjustRect = mapRect.insetBy(
-            dx: -padding.left - padding.right,
-            dy: -padding.top - padding.bottom
+        let paddingFactor: Double = 1.5
+        let latitudeDelta = max(0.01, (maxDistance * paddingFactor) / 111_000)
+        let longitudeDelta = max(0.01, (maxDistance * paddingFactor) / (111_000 * cos(userLocation.latitude * .pi / 180)))
+        
+        let centerLatitude = (userLocation.latitude + destinationCoordinate.latitude) / 2
+        let centerLongitude = (userLocation.longitude + destinationCoordinate.longitude) / 2
+        let centerCoordinate = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
+        
+        let region = MKCoordinateRegion(
+            center: centerCoordinate,
+            span: MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
         )
         
         DispatchQueue.main.async {
-            self.position = .rect(adjustRect)
+            self.position = .region(region)
         }
     }
 }

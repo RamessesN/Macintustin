@@ -9,11 +9,11 @@ import SwiftUI
 import MapKit
 
 struct HomeView: View {
-    @State private var selectedView: ViewType = .map
+    @State private var selectedView: ViewType = .ar
     
     enum ViewType: String, CaseIterable, Identifiable {
-        case map = "Map View"
         case ar = "AR View"
+        case map = "Map View"
             
         var id: Self { self }
     }
@@ -36,13 +36,12 @@ struct HomeView: View {
             }
             .zIndex(1)
             
-            if selectedView == .map {
-                PlainView()
+            if selectedView == .ar {
+                AugmentedRealityView()
                     .transition(.opacity)
             } else {
-                ARView()
+                PlainView()
                     .transition(.opacity)
-                    .ignoresSafeArea(.all)
             }
         }
     }

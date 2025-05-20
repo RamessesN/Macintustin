@@ -20,6 +20,7 @@ struct PhotoCarouselView: View {
                         .resizable()
                         .scaledToFit()
                         .cornerRadius(8)
+                        .clipped()
                         .tag(index)
                 }
             }

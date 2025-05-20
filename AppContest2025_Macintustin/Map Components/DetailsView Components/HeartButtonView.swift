@@ -8,55 +8,45 @@
 import SwiftUI
 
 struct HeartButtonView: View {
-    @State private var isLiked: Bool = UserDefaults.standard.bool(forKey: "isLiked")
-    @State private var likeCount: Int = UserDefaults.standard.integer(forKey: "likeCount")
+    @EnvironmentObject private var likeManager: LikeManager
+    @State private var isLiked: Bool = false
     @State private var showCommentPrompt = false
     @State private var showCommentView = false
     @State private var hasExistingComment = false
     @State private var existingComment: String = ""
     
     var placemarkName: String
-    let defaultLikeCounts: [String: Int] = [
-        "Ocean University of China (West Coast Campus)": 12,
-        "Ocean University of China Xihaian Campus (West Gate)": 12,
-        "Ocean University of China West Coast Campus": 12,
-        "Haijun Park": 20,
-        "Mangrove Tree Town Square": 8
-    ]
     
     var body: some View {
         VStack {
             Button(action: {
-                if isLiked {
-                    likeCount -= 1
-                } else {
-                    likeCount += 1
+                let newIsLiked = !isLiked
+                
+                if newIsLiked {
+                    likeManager.updateLikeCount(for: placemarkName, increment: true)
                     
                     loadExistingComment()
                     showCommentPrompt = true
+                } else {
+                    likeManager.updateLikeCount(for: placemarkName, increment: false)
                 }
                 
-                isLiked.toggle()
-                
-                let likeKey = "isLiked_\(placemarkName)"
-                let countKey = "likeCount_\(placemarkName)"
-                
-                UserDefaults.standard.set(isLiked, forKey: likeKey)
-                UserDefaults.standard.set(likeCount, forKey: countKey)
+                likeManager.updateLikeState(for: placemarkName, isLiked: newIsLiked)
+                isLiked = newIsLiked
             }, label: {
                 Image(systemName: isLiked ? "heart.fill" : "heart")
                     .resizable()
                     .frame(width: 28, height: 26)
-                    .foregroundColor(.red.opacity(0.8))
+                    .foregroundStyle(.red.opacity(0.8))
             })
             
-            Text("\(likeCount)")
+            Text("\(likeManager.likeCounts[placemarkName] ?? 0)")
                 .font(.footnote)
-                .foregroundColor(.gray)
+                .foregroundStyle(.gray)
         }
         .padding(.trailing, 18)
         .onAppear {
-            loadLikeData()
+            isLiked = likeManager.isLikedStates[placemarkName] ?? false
         }
         .alert(hasExistingComment ? "Edit Your Comment?" : "Write a Comment?", isPresented: $showCommentPrompt) {
             Button("No", role: .cancel) {}
@@ -76,30 +66,22 @@ struct HeartButtonView: View {
             .presentationCompactAdaptation((.popover))
         }
     }
-}
-
-extension HeartButtonView {
-    func loadLikeData() {
-        let likeKey = "isLiked_\(placemarkName)"
-        let countKey = "likeCount_\(placemarkName)"
-        
-        isLiked = UserDefaults.standard.bool(forKey: likeKey)
-        likeCount = UserDefaults.standard.integer(forKey: countKey)
-                
-        if likeCount == 0, let defaultCount = defaultLikeCounts[placemarkName] {
-            likeCount = defaultCount
-            UserDefaults.standard.set(likeCount, forKey: countKey)
-        }
-    }
     
     func loadExistingComment() {
         let commentKey = "comments_\(placemarkName)"
-        if let comments = UserDefaults.standard.stringArray(forKey: commentKey), !comments.isEmpty {
-            existingComment = comments.first ?? ""
+        
+        if let userComments = UserDefaults.standard.stringArray(forKey: commentKey), !userComments.isEmpty {
+            existingComment = userComments.last ?? ""
             hasExistingComment = true
-        } else {
+            return
+        }
+        
+        if let defaultComments = AppData.defaultComments[placemarkName], !defaultComments.isEmpty {
+            existingComment = defaultComments.first ?? ""
             hasExistingComment = false
+        } else {
             existingComment = ""
+            hasExistingComment = false
         }
     }
 }

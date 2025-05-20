@@ -24,14 +24,6 @@ struct LocationDetailsView: View {
     @State private var pendingImages: [UIImage] = []
     
     let cancelNavigation: () -> Void
-    
-    private let PhotoDatabase: [String: [String]] = [
-        "Ocean University of China (West Coast Campus)": ["oucwest_1", "oucwest_2", "oucwest_3"],
-        "Ocean University of China Xihaian Campus (West Gate)": ["oucwest_1", "oucwest_2", "oucwest_3"],
-        "Ocean University of China West Coast Campus": ["oucwest_1", "oucwest_2", "oucwest_3"],
-        "Haijun Park": ["haijunpark_1", "haijunpark_2", "haijunpark_3"],
-        "Mangrove Tree Town Square": ["hongshulin_1", "hongshulin_2"]
-    ]
 
     var body: some View {
         VStack {
@@ -112,7 +104,7 @@ extension LocationDetailsView {
         
         var fetchedPhotos: [UIImage] = []
         
-        if let photoNames = PhotoDatabase[placeName] {
+        if let photoNames = AppData.PhotoDatabase[placeName] {
             for name in photoNames where !name.isEmpty {
                 if let image = UIImage(named: name) {
                     fetchedPhotos.append(image)

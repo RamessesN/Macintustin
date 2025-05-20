@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CommentView: View {
-    @Environment(\.dismiss) var dismiss
     @State private var commentText: String = ""
+    @State private var characterCount: Int = 0
+    @Environment(\.dismiss) var dismiss
     
     var placemarkName: String
     var initialComment: String
@@ -22,6 +23,9 @@ struct CommentView: View {
                     .frame(height: 200)
                     .background(Color.gray.opacity(0.1))
                     .cornerRadius(8)
+                    .onChange(of: commentText) {
+                        characterCount = commentText.count
+                    }
                 
                 Button(action: {
                     saveComment()
@@ -31,7 +35,7 @@ struct CommentView: View {
                         .padding()
                         .frame(maxWidth: .infinity)
                         .background(Color.blue)
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .cornerRadius(8)
                 }
                 .padding()
@@ -56,11 +60,14 @@ struct CommentView: View {
         guard !commentText.isEmpty else { return }
         
         let commentKey = "comments_\(placemarkName)"
+        
         var comments: [String] = UserDefaults.standard.stringArray(forKey: commentKey) ?? []
         
-        if let index = comments.firstIndex(where: { $0 == initialComment }) {
-            comments[index] = commentText
-        } else {
+        if comments.isEmpty, let sampleComments = AppData.defaultComments[placemarkName], !sampleComments.isEmpty {
+            comments = sampleComments
+        }
+        
+        if !comments.contains(commentText) {
             comments.append(commentText)
         }
         
