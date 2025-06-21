@@ -1,9 +1,25 @@
-//
-//  CommentView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file CommentView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A view for writing, editing, and saving comments for a specific location.
+ @details
+  CommentView provides an interface where users can input or modify textual comments
+  associated with a specific placemark. The view uses a TextEditor for comment entry,
+  displays a dynamic character counter, and includes "Done" and "Cancel" controls for
+  saving or discarding user input.
+
+  On submission, the comment is saved into `UserDefaults` under a key specific to the
+  placemark name. Duplicate comments are avoided, and default comments can be loaded
+  if none exist yet. The view also handles dismissing itself and restoring any initial
+  comment text when it appears.
+
+  It integrates local persistence, dynamic form handling, and navigation controls
+  using SwiftUI idioms.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 

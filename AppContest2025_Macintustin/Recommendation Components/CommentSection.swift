@@ -1,9 +1,27 @@
-//
-//  CommentSection.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file CommentSection.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Displays photos and comments for a specific place.
+ @details
+  CommentSection is a reusable SwiftUI component that provides:
+  - A photo carousel (from both local and user-uploaded photos)
+  - A list of default and user-added comments for a given place
+
+  Features:
+  - Auto-playing photo slideshow (every 3 seconds if >1 image)
+  - Dynamically loads photos and comments based on the provided place name
+  - Graceful fallback messages when no comments or photos exist
+
+  It integrates with `AppData.PhotoDatabase`, `AppData.defaultComments`, and user-stored
+  data in `UserDefaults` and `PhotoStorage`.
+
+  This view is primarily used within expandable cells (e.g., PlaceRow) to enrich
+  user experience with visuals and feedback.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 

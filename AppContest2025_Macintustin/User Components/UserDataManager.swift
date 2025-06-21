@@ -1,9 +1,22 @@
-//
-//  UserDataManager.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/5/6.
-//
+/**
+ @file UserDataManager.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A singleton utility for managing user profile data.
+ @details
+  This class provides methods to persist and retrieve user-related data,
+  such as:
+  - User name (stored using UserDefaults)
+  - User profile image (saved to the app's documents directory)
+
+  It abstracts away the data persistence details, allowing views to interact
+  with user information in a simple and consistent manner.
+
+  The image is stored as a PNG file in the app’s sandboxed file system.
+ 
+ @author 赵禹惟
+ @date 2025/5/6
+ */
 
 import Foundation
 import SwiftUI

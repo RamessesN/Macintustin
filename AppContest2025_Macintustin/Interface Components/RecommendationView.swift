@@ -1,9 +1,15 @@
-//
-//  RecommendationView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/16.
-//
+/**
+ @file RecommendationView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A view displaying the top 10 most liked places.
+ @details
+  RecommendationView presents a ranked list of places based on their like counts,
+  retrieved from the shared LikeManager environment object. This component serves as a simple recommendation system based on user preferences.
+ 
+ @author 赵禹惟
+ @date 2025/4/16
+ */
 
 import SwiftUI
 

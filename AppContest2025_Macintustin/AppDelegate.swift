@@ -1,9 +1,22 @@
-//
-//  AppDelegate.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/16.
-//
+/**
+ @file AppDelegate.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Application delegate and launch configuration.
+ @details
+  AppDelegate handles the initial setup and lifecycle events of the application.
+
+  It performs the following tasks:
+  - Initializes a shared `LikeManager` instance to manage user "likes"
+  - Creates the root SwiftUI view (`StartView`) and injects the environment object
+  - Sets up a `UIWindow` with a `UIHostingController` to bridge UIKit and SwiftUI
+  - Manages app lifecycle callbacks such as backgrounding and foregrounding
+
+  This file serves as the entry point for the app using the `@main` attribute.
+ 
+ @author 赵禹惟
+ @date 2025/4/16
+ */
 
 import UIKit
 import SwiftUI

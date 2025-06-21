@@ -1,9 +1,16 @@
-//
-//  LikeManager.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/20.
-//
+/**
+ @file LikeManager.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Manages like counts and like state persistence for locations.
+ @details
+  LikeManager is an ObservableObject responsible for managing the like counts and
+  liked/unliked states for various places within the app. It initializes by loading
+  default like counts from AppData as well as any saved user preferences from UserDefaults.
+ 
+ @author 赵禹惟
+ @date 2025/4/20
+ */
 
 import Foundation
 import SwiftUI

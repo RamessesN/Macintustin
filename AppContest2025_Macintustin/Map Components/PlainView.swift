@@ -1,9 +1,29 @@
-//
-//  PlainView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/16.
-//
+/**
+ @file PlainView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A SwiftUI view providing map search, selection, and navigation functionality.
+ @details
+  PlainView is a comprehensive map interface built with SwiftUI and MapKit that enables users
+  to search for locations, view search results on the map, select destinations, and obtain
+  walking directions. It includes:
+
+  - LocationManager: A helper class for requesting and updating the user's current location.
+  - A search bar allowing natural language queries for nearby places.
+  - Dynamic rendering of search results as map markers with color coding.
+  - Displaying route overlays when navigation is active.
+  - Integration with LocationDetailsView to show detailed information about selected locations.
+  - Support for starting and cancelling navigation with animated transitions.
+  - Intelligent map region adjustment to fit user and destination coordinates.
+  - Handling user interactions such as dismissing keyboard on map taps and clearing search text.
+
+ This view manages a variety of state variables including map position, search results,
+ selected destination, routing information, and navigation status, while ensuring
+ smooth UI updates and user experience.
+ 
+ @author 赵禹惟
+ @date 2025/4/16
+ */
 
 import SwiftUI
 import MapKit

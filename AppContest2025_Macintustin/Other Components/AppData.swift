@@ -1,9 +1,25 @@
-//
-//  AppData.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file AppData.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Centralized static data storage for the application.
+ @details
+  AppData provides static dictionaries containing key application data used across
+  the project, including:
+
+  - PhotoDatabase: Maps location names to arrays of image asset names representing
+    default photos for various places.
+  - defaultLikeCounts: Initial like counts associated with each location,
+    representing popularity or user interest.
+  - defaultComments: Sample user comments associated with locations, used as
+    fallback or default feedback entries.
+
+  This struct centralizes hardcoded or preloaded content to facilitate data
+  management and reuse throughout the app's UI components and logic.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import Foundation
 

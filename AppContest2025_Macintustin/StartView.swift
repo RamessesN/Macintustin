@@ -1,9 +1,25 @@
-//
-//  StartView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/16.
-//
+/**
+ @file StartView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Startup screen
+ @details
+  StartView serves as the animated splash screen for the application. It displays a globe icon
+  and the title “Cairo World” with fade-in and scaling animations on launch. A brief footer note
+  indicates the app is developed by Macintustin.
+
+  The animation includes:
+  - A scaling and fading globe icon
+  - A sliding and fading text title
+  - A delay before transitioning into the main `ContentView`
+
+  After a total duration of 3.5 seconds, the view automatically transitions to the main app interface
+  using a smooth opacity-based animation. This view enhances user experience by providing a
+  branded and visually appealing entry point to the app.
+ 
+ @author 赵禹惟
+ @date 2025/4/16
+ */
 
 import SwiftUI
 

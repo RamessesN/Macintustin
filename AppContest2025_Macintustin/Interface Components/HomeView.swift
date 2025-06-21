@@ -1,9 +1,16 @@
-//
-//  HomeView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/16.
-//
+/**
+ @file HomeView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief The main interface view is applied to provide the switch between AR and MAP view.
+ @details
+   HomeView is the main view users see when they enter the app, which contains a Segmented Picker and allows users to switch between "AR view" and "Map view".
+   - AR View: Shows ARKit-based augmented reality content.
+   - Map View: Shows a flat map view based on MapKit.
+ 
+ @author 赵禹惟
+ @date 2025/4/16
+ */
 
 import SwiftUI
 import MapKit

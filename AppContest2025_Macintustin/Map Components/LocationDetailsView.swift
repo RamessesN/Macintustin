@@ -1,9 +1,28 @@
-//
-//  LocationDetailsView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/17.
-//
+/**
+ @file LocationDetailsView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A detailed view presenting location information, photos, and navigation controls.
+ @details
+  LocationDetailsView is a SwiftUI component that displays detailed information about a
+  selected location represented by an `MKMapItem`. The view includes:
+
+  - A header displaying the location's name and title
+  - A photo carousel showing both default and user-uploaded photos with automatic slideshow
+  - Navigation buttons to open maps, get directions, or cancel trips
+  - A heart-shaped like button with comment support
+
+  It manages photo uploading through an image picker and confirms uploads with an alert.
+  Photos are fetched from both bundled resources and user storage, with slideshow timing
+  handled by a repeating timer.
+
+  The component binds to multiple external state variables to coordinate map selection,
+  navigation states, and routing information. It encapsulates interaction between map
+  data, local photo storage, and user engagement features.
+ 
+ @author 赵禹惟
+ @date 2025/4/17
+ */
 
 import SwiftUI
 import MapKit

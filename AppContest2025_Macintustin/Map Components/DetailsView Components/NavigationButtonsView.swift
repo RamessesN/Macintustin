@@ -1,9 +1,26 @@
-//
-//  NavigationButtonsView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file NavigationButtonsView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A view providing navigation control buttons for map-based directions.
+ @details
+  NavigationButtonsView is a SwiftUI component that offers users a set of buttons
+  for interacting with map-based navigation. Depending on the current navigation state,
+  the view conditionally displays buttons to:
+
+  - Open the selected destination in Apple Maps using `MKMapItem.openInMaps()`
+  - Cancel an ongoing trip via a callback function
+  - Trigger route generation by toggling `getDirections`
+
+  The view adapts dynamically based on the `routeDisplaying` flag and manages
+  interaction flow through bindings to external state variables (`show`, `getDirections`).
+
+  It's designed to integrate into a map-based location detail interface, allowing
+  flexible control over navigation and routing behavior.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 import MapKit

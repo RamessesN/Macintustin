@@ -1,9 +1,23 @@
-//
-//  PlaceRow.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file PlaceRow.swift
+ @project AppContest2025_Macintustin
+  
+ @brief A UI component displaying a single place's name, like count, and comments.
+ @details
+  PlaceRow is a reusable view used to display an overview of a place's name,
+  its current like count, and user comments. It includes:
+  - A heart icon with the total like count
+  - A place name title
+  - A chevron icon that toggles expansion
+  - An expandable comment section shown when tapped
+
+  Tapping the row toggles the visibility of the comment section below.
+
+  This view relies on the `LikeManager` environment object for retrieving dynamic like counts.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 

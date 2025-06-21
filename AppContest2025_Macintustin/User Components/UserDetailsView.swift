@@ -1,9 +1,20 @@
-//
-//  UserDetailsView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/5/5.
-//
+/**
+ @file UserDetailsView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A SwiftUI view displaying detailed user profile information.
+ @details
+  This view presents a summary of the current user's profile,
+  including:
+  - Their name (passed via a binding)
+  - Their profile image (if available)
+  
+  It is typically shown as a secondary screen when the user opts to view or edit profile details.
+  This component is fully reactive to updates in bound user data.
+ 
+ @author 赵禹惟
+ @date 2025/5/5
+ */
 
 import SwiftUI
 

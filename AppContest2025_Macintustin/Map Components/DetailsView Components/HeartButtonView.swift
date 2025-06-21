@@ -1,9 +1,28 @@
-//
-//  HeartButtonView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file HeartButtonView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A like button view with optional comment prompt and popover support.
+ @details
+  HeartButtonView is a reusable SwiftUI component that represents a heart-shaped
+  "like" button tied to a specific placemark. It displays the current like count and
+  manages like/unlike logic using the shared `LikeManager` environment object.
+
+  When the user taps the button to like a placemark:
+  - The local like state and count are updated
+  - The user is prompted to leave a comment
+  - If an existing comment exists, the user can choose to edit it
+  - A `CommentView` popover is shown for comment input
+
+  All comment data is saved to `UserDefaults` using a unique key per placemark,
+  with support for loading fallback default comments from the `AppData` structure.
+
+  This component encapsulates interactive liking functionality and enhances user
+  engagement through optional contextual feedback.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 

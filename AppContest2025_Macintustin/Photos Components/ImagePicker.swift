@@ -1,9 +1,14 @@
-//
-//  ImagePicker.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file ImagePicker.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A wrapper for PHPickerViewController to select multiple images from the user's photo library.
+ @details
+  ImagePicker is a `UIViewControllerRepresentable` SwiftUI component that presents the system photo picker (`PHPickerViewController`) and allows users to select one or more images (up to a defined limit, default 3).
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 import PhotosUI

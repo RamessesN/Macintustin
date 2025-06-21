@@ -1,9 +1,20 @@
-//
-//  PhotosUpload.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file PhotosUpload.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Handles local photo storage for user-uploaded images.
+ @details
+  PhotoStorage is a singleton class that provides functionality for:
+  - Saving user-uploaded photos (organized by location name)
+  - Loading photos from the device’s local Documents directory
+  - Deleting specific photo files if needed
+
+  The photos are stored as PNG files in subdirectories named after the location
+  (e.g., "Laoshan Mountain/uuid.png"). This allows for efficient organization and retrieval.
+ 
+ @author 赵禹惟
+ @date 2025/4/18
+ */
 
 import SwiftUI
 

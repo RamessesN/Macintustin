@@ -1,9 +1,26 @@
-//
-//  UserView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/16.
-//
+/**
+ @file UserView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief A user profile view allowing name editing and profile picture selection.
+ @details
+  UserView is a SwiftUI-based profile management interface where users can:
+  - View and update their username
+  - View and select a profile image from their photo library
+  - Navigate to a detailed settings page
+
+  The view loads initial data from a shared UserDataManager singleton and saves
+  any changes (e.g., to name or image) back to persistent storage. Image selection
+  is handled through a custom `ImagePicker` component. The UI includes a circular
+  profile image view, a text field for the username, and a button leading to
+  advanced user settings via a `NavigationDestination`.
+
+  This view demonstrates integration of state management, user interaction,
+  and local data persistence in a user-centric interface.
+ 
+ @author 赵禹惟
+ @date 2025/4/16
+ */
 
 import SwiftUI
 
