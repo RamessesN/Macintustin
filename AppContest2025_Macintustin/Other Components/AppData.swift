@@ -25,7 +25,7 @@ import Foundation
 
 struct AppData {
     static let PhotoDatabase: [String: [String]] = [
-        "Ocean University of China (West Coast Campus)": ["oucwest_1", "oucwest_2", "oucwest_3"],
+        "Ocean University of China Xihaian Campus": ["oucwest_1", "oucwest_2", "oucwest_3"],
         "Haijun Park": ["haijunpark_1", "haijunpark_2", "haijunpark_3"],
         "Mangrove Tree Town Square": ["hongshulin_1", "hongshulin_2"],
         "Zhanqiao Scenic Area": ["zhanqiao_1", "zhanqiao_2", "zhanqiao_3"],
@@ -44,7 +44,7 @@ struct AppData {
         "Zhanqiao Scenic Area": 888,
         "Badaguan Scenic Area": 623,
         "Ocean University of China Laoshan Campus": 1668,
-        "Ocean University of China (West Coast Campus)": 500,
+        "Ocean University of China Xihaian Campus": 500,
         "Haijun Park": 168,
         "Mangrove Tree Town Square": 90,
         "Qingdao Xinzhan Bridge - Shenlan Zhiguang": 96,
@@ -71,7 +71,14 @@ struct AppData {
             "Nice view. Recommended!",
             "A little regret, to catch up with the typhoon closed the mountain"
         ],
-        "Ocean University of China (West Coast Campus)": [
+        "Ocean University of China Xihaian Campus": [
+            "The scenery is pleasant and suitable for study",
+            "The library is spectacular, but it's not built yet",
+            "The location is remote!!!",
+            "Food in canteen needs to be strengthened!",
+            "I love this place!"
+        ],
+        "Ocean University of China West Coast Campus": [
             "The scenery is pleasant and suitable for study",
             "The library is spectacular, but it's not built yet",
             "The location is remote!!!",

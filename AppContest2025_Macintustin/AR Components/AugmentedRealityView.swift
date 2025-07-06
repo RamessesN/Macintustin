@@ -1,38 +1,72 @@
-//
-//  AugmentedRealityView.swift
-//  AppContest2025_Macintustin
-//
-//  Created by 赵禹惟 on 2025/4/18.
-//
+/**
+ @file AugmentedRealityView.swift
+ @project AppContest2025_Macintustin
+ 
+ @brief Main view for the augmented reality experience
+ @details
+   This file defines the SwiftUI view responsible for displaying and interacting with AR content. It integrates an AR view container, model selection UI, and location services.
+ 
+ @author 赵禹惟
+ @date 2025/5/16
+ */
 
 import SwiftUI
-import RealityKit
-import ARKit
+import RealityFoundation
 
 struct AugmentedRealityView: View {
-    @State private var isPlainDetected = false
+    @State private var isPlaneDetected = false
     @State private var isToggled = false
+    @State private var selectedModelName = "Drummer"
+    @State private var isCommenting = false
+    @State private var selectedModelEntity: ModelEntity?
+    @StateObject private var locationManager = LocationManager()
+
+    let availableModels = ["Drummer", "RocketToy", "ToyBiplane"]
 
     var body: some View {
         ZStack {
             ARViewContainer(
-                isPlainDetected: $isPlainDetected,
-                isToggled: $isToggled
+                isPlaneDetected: $isPlaneDetected,
+                isToggled: $isToggled,
+                selectedModelName: $selectedModelName,
+                isCommenting: $isCommenting,
+                selectedModelEntity: $selectedModelEntity,
+                locationManager: locationManager
             )
+            .sheet(isPresented: $isCommenting) {
+                if let model = selectedModelEntity {
+                    let placeName = model.name
+                    CommentView(
+                        placemarkName: placeName,
+                        initialComment: fetchInitialComment(for: placeName)
+                    )
+                }
+            }
 
             GeometryReader { geometry in
                 Image(systemName: "plus")
                     .resizable()
                     .frame(width: 20, height: 20)
-                    .foregroundStyle(isPlainDetected ? .red : .red.opacity(0.5))
+                    .foregroundStyle(isPlaneDetected ? .red : .red.opacity(0.5))
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
             }
 
             VStack {
                 Spacer()
 
+                Picker("Select Model", selection: $selectedModelName) {
+                    ForEach(availableModels, id: \.self) { model in
+                        Text(model).tag(model)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .padding(8)
+                .background(.ultraThinMaterial)
+                .cornerRadius(12)
+                .fixedSize()
+
                 Button(action: {
-                    isToggled = true
+                    isToggled.toggle()
                 }) {
                     Image(systemName: "plus.circle")
                         .resizable()
@@ -44,70 +78,16 @@ struct AugmentedRealityView: View {
                 .padding(.bottom, 10)
             }
         }
+        .onAppear {
+            locationManager.requestLocation()
+        }
     }
 }
 
-struct ARViewContainer: UIViewRepresentable {
-    @Binding var isPlainDetected: Bool
-    @Binding var isToggled: Bool
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self)
-    }
-
-    func makeUIView(context: Context) -> ARView {
-        let arView = ARView(frame: .zero)
-        let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.horizontal]
-        arView.session.run(config)
-        arView.session.delegate = context.coordinator
-        context.coordinator.arView = arView
-        return arView
-    }
-
-    func updateUIView(_ uiView: ARView, context: Context) {
-        if isPlainDetected && isToggled && !context.coordinator.anchorAdded {
-            guard let modelEntity = try? ModelEntity.load(named: "MyModel") else {
-                fatalError("Model Load Failed")
-            }
-
-            let anchorEntity = AnchorEntity(plane: .horizontal)
-            anchorEntity.addChild(modelEntity)
-            uiView.scene.anchors.append(anchorEntity)
-
-            context.coordinator.anchorAdded = true
-        }
-    }
-
-    class Coordinator: NSObject, ARSessionDelegate {
-        var parent: ARViewContainer
-        var arView: ARView?
-        var anchorAdded = false
-
-        init(parent: ARViewContainer) {
-            self.parent = parent
-        }
-
-        func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-            for anchor in anchors {
-                if anchor is ARPlaneAnchor {
-                    DispatchQueue.main.async {
-                        self.parent.isPlainDetected = true
-                    }
-                }
-            }
-        }
-        
-        func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-            for anchor in anchors {
-                if let planeAnchor = anchor as? ARPlaneAnchor {
-                    if planeAnchor.planeExtent.width > 0 && planeAnchor.planeExtent.height > 0 {
-                        DispatchQueue.main.async {
-                            self.parent.isPlainDetected = true
-                        }
-                    }
-                }
-            }
-        }
+extension AugmentedRealityView {
+    func fetchInitialComment(for placeName: String) -> String {
+        let key = "comments_\(placeName)"
+        let comments = UserDefaults.standard.stringArray(forKey: key) ?? []
+        return comments.last ?? ""
     }
 }
